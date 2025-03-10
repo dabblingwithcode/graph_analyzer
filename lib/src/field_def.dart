@@ -25,13 +25,14 @@ class FieldDef {
     final element = variable.declaredElement;
     String? inferredType;
     if (element != null) {
-      inferredType = element.type.runtimeType.toString();
+      inferredType = element.type.getDisplayString(withNullability: true);
+      ;
       Logger().info('inferred type of $nameLexeme is  $inferredType',
           onlyVerbose: true);
     }
 
     type = ReturnTypeConverter(
-      fields.type?.toString() ?? inferredType ?? 'dynamic',
+      fields.type?.toString() ?? variable.initializer?.toString() ?? 'dynamic',
     ).inUml;
     Logger().info('type of $nameLexeme is is $type', onlyVerbose: true);
     isPrivate = nameLexeme.startsWith('_');
