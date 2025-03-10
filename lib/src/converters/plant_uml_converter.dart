@@ -5,10 +5,15 @@ final class PlantUmlConverter implements Converter {
 
   @override
   String convertToText(final List<ClassDef> defs) {
-    final stringBuffer = StringBuffer('@startuml\n// Test\n\n');
+    final stringBuffer = StringBuffer('@startuml\n\n');
 
 // apply dark theme
     stringBuffer.write('skinparam backgroundColor #000000\n\n');
+    stringBuffer.write('skinparam {\n');
+    stringBuffer.write('    ClassStereotypeFontColor #FFD700\n');
+    stringBuffer.write('    ClassStereotypeFontSize 12\n');
+    stringBuffer.write('    ClassStereotypeFontStyle bold\n');
+    stringBuffer.write('skinparam {\n\n');
     stringBuffer.write('skinparam class {\n');
     stringBuffer.write('    BackgroundColor #333333\n');
     stringBuffer.write('    BorderColor #000000\n');
@@ -46,10 +51,10 @@ final class PlantUmlConverter implements Converter {
       result.write(
         '${method.isPrivate ? privateAccessModifier : publicAccessModifier}'
         //'${method.isGetter || method.isSetter ? '«' : ''}'
-        '${method.isGetter ? '<font color=purple>get</font> ' : ''}'
+        '${method.isGetter ? '<font color=#c36dfd>get</font> ' : ''}'
         // '${method.isGetter && method.isSetter ? '/' : ''}'
-        '${method.isSetter ? 'set' : ''}'
-        '${method.isGetter || method.isSetter ? '»' : ''}'
+        '${method.isSetter ? '<font color=#c36dfd>set</font> ' : ''}'
+        // '${method.isGetter || method.isSetter ? '»' : ''}'
         '${method.name}(): '
         '${method.returnType}\n',
       );
