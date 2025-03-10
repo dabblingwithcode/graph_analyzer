@@ -67,6 +67,7 @@ final class PlantUmlConverter implements Converter {
   String convertFields(final ClassDef def) {
     final result = StringBuffer();
     for (final field in def.fields) {
+      Logger().info('Field processing: ${field.toString()}', onlyVerbose: true);
       result.write(
         '${field.isPrivate ? privateAccessModifier : publicAccessModifier}'
         '${field.name}:'

@@ -23,12 +23,10 @@ class FieldDef {
     final element = variable.declaredElement;
     String? inferredType;
     if (element != null) {
-      Logger().info('declaredElement of $nameLexeme is not null',
-          onlyVerbose: true);
       inferredType = element.type.runtimeType.toString();
+      Logger().info('inferred type of $nameLexeme is  $inferredType',
+          onlyVerbose: true);
     }
-    Logger().info('inferred type of $nameLexeme is is $inferredType',
-        onlyVerbose: true);
 
     type = ReturnTypeConverter(
       fields.type?.toString() ?? inferredType ?? 'dynamic',
