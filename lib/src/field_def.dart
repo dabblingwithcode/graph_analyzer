@@ -23,7 +23,7 @@ class FieldDef {
     final element = variable.declaredElement;
     String? inferredType;
     if (element != null) {
-      inferredType = element.type.getDisplayString(withNullability: false);
+      inferredType = element.type.runtimeType.toString();
     }
     Logger().info('inferred tyoe is $inferredType', onlyVerbose: true);
 
