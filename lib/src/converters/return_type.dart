@@ -22,7 +22,7 @@ class ReturnTypeConverter {
             match.pattern, '${_clearString(groupOfGeneric)}[0..*]');
       }
     });
-    return returnType.replaceAll('Future<', '').replaceAll('>', '');
+    return returnType.replaceAll('Future<', '');
   }
 
   String _clearString(final String input) {
