@@ -60,7 +60,15 @@ final class PlantUmlConverter implements Converter {
   }
 
   @override
-  String convertStartClass(final ClassDef def) => 'class ${def.name} {\n';
+  String convertStartClass(final ClassDef def) {
+    if (def.extendsOf != null) {
+      return 'class ${def.name} extends <font color=yellow>${def.extendsOf}</font> {\n';
+    }
+    if (def.implementsOf.isNotEmpty) {
+      return 'class ${def.name} implements <font color=yellow>${def.implementsOf.toList().toString()}</font> {\n';
+    }
+    return 'interface ${def.name} {\n';
+  }
 
   @override
   String convertEndClass(final ClassDef def) => '}\n';
