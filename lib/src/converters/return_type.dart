@@ -8,7 +8,7 @@ class ReturnTypeConverter {
     if (returnType == 'void') {
       return 'void';
     }
-    final regexpList = RegExp(r'List?(<[^>]*>)?');
+    final regexpList = RegExp(r'\bList(<[^>]*>)?\b');
     regexpList.allMatches(returnType).forEach((final match) {
       final groupOfList = match.group(0);
       final groupOfGeneric = match.group(1);
