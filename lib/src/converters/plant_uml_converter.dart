@@ -5,7 +5,19 @@ final class PlantUmlConverter implements Converter {
 
   @override
   String convertToText(final List<ClassDef> defs) {
-    final stringBuffer = StringBuffer('@startuml\n');
+    final stringBuffer = StringBuffer('@startuml\n\n');
+
+// apply dark theme
+    stringBuffer.write('skinparam backgroundColor #000000\n\n');
+    stringBuffer.write('skinparam class {\n');
+    stringBuffer.write('    BackgroundColor #333333\n');
+    stringBuffer.write('    BorderColor #000000\n');
+    stringBuffer.write('    ArrowColor #FFFFFF\n');
+    stringBuffer.write('    FontColor #D3D3D3\n');
+    stringBuffer.write('}\n');
+    stringBuffer.write('skinparam classAttribute {\n');
+    stringBuffer.write('    FontColor #D3D3D\n');
+    stringBuffer.write('}\n');
 
     for (final def in defs) {
       stringBuffer.write(def.isAbstract ? 'abstract ' : '');
