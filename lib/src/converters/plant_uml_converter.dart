@@ -5,7 +5,7 @@ final class PlantUmlConverter implements Converter {
 
   @override
   String convertToText(final List<ClassDef> defs) {
-    final stringBuffer = StringBuffer('@startuml\n\n');
+    final stringBuffer = StringBuffer('@startuml\n// Test\n\n');
 
 // apply dark theme
     stringBuffer.write('skinparam backgroundColor #000000\n\n');
@@ -45,9 +45,9 @@ final class PlantUmlConverter implements Converter {
     for (final method in def.methods) {
       result.write(
         '${method.isPrivate ? privateAccessModifier : publicAccessModifier}'
-        '${method.isGetter || method.isSetter ? '«' : ''}'
-        '${method.isGetter ? 'get' : ''}'
-        '${method.isGetter && method.isSetter ? '/' : ''}'
+        //'${method.isGetter || method.isSetter ? '«' : ''}'
+        '${method.isGetter ? '<font color=purple>get</font> ' : ''}'
+        // '${method.isGetter && method.isSetter ? '/' : ''}'
         '${method.isSetter ? 'set' : ''}'
         '${method.isGetter || method.isSetter ? '»' : ''}'
         '${method.name}(): '
@@ -74,12 +74,12 @@ final class PlantUmlConverter implements Converter {
   @override
   String convertStartClass(final ClassDef def) {
     if (def.extendsOf != null) {
-      return 'class ${def.name} extends <font color=yellow>${def.extendsOf}</font> {\n';
+      return 'class ${def.name} <<${def.extendsOf}>> {\n';
     }
     if (def.implementsOf.isNotEmpty) {
-      return 'class ${def.name} implements <font color=yellow>${def.implementsOf.toList().toString()}</font> {\n';
+      return 'class ${def.name} <<${def.implementsOf.toList().toString()}>> {\n';
     }
-    return 'interface ${def.name} {\n';
+    return 'class ${def.name} {\n';
   }
 
   @override
