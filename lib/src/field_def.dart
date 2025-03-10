@@ -19,12 +19,12 @@ class FieldDef {
   FieldDef(final FieldDeclaration declaration) {
     final fields = declaration.fields;
     final nameLexeme = fields.variables.first.name.lexeme;
-    final inferredType = fields.variables.first.runtimeType;
-    Logger()
-        .info('inferred tyoe is ${inferredType.toString()}', onlyVerbose: true);
+
+    Logger().info('inferred tyoe is ${fields.runtimeType.toString()}',
+        onlyVerbose: true);
 
     type = ReturnTypeConverter(
-      fields.type?.toString() ?? inferredType.toString(),
+      fields.type?.toString() ?? fields.runtimeType.toString(),
     ).inUml;
     isPrivate = nameLexeme.startsWith('_');
     name = nameLexeme.replaceAll(
