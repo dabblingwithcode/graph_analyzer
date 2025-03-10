@@ -21,22 +21,20 @@ class FieldDef {
     final nameLexeme = fields.variables.first.name.lexeme;
     final variable = declaration.fields.variables.first;
     final element = variable.declaredElement;
+    String? inferredType;
     if (element != null) {
-      final inferredType =
-          element.type.getDisplayString(withNullability: false);
-
-      Logger().info('inferred tyoe is $inferredType', onlyVerbose: true);
-
-      type = ReturnTypeConverter(
-        fields.type?.toString() ??
-            fields.variables.first.runtimeType.toString(),
-      ).inUml;
-      isPrivate = nameLexeme.startsWith('_');
-      name = nameLexeme.replaceAll(
-        RegExp(r'_'),
-        '',
-      );
+      inferredType = element.type.getDisplayString(withNullability: false);
     }
+    Logger().info('inferred tyoe is $inferredType', onlyVerbose: true);
+
+    type = ReturnTypeConverter(
+      fields.type?.toString() ?? inferredType ?? 'dynamic',
+    ).inUml;
+    isPrivate = nameLexeme.startsWith('_');
+    name = nameLexeme.replaceAll(
+      RegExp(r'_'),
+      '',
+    );
   }
 
   @override
