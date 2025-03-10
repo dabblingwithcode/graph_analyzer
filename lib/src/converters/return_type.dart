@@ -23,7 +23,7 @@ class ReturnTypeConverter {
       }
     });
     if (returnType.contains('ValueListenable')) {
-      returnType = "<font color='yellow'>$returnType</font>";
+      returnType = '<font color=yellow>$returnType</font>';
     }
     return returnType.replaceAll('Future<', '');
   }
