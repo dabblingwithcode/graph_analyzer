@@ -16,7 +16,7 @@ class ReturnTypeConverter {
         return;
       }
       if (groupOfGeneric == null) {
-        returnType = returnType.replaceAll(match.pattern, 'dynamic[0..*]');
+        // returnType = returnType.replaceAll(match.pattern, 'dynamic[0..*]');
       } else {
         returnType = returnType.replaceAll(
             match.pattern, '${_clearString(groupOfGeneric)}[0..*]');
