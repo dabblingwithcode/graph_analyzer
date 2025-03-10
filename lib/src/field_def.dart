@@ -17,6 +17,8 @@ class FieldDef {
   late final bool isPrivate;
 
   FieldDef(final FieldDeclaration declaration) {
+    Logger()
+        .info('Field processing: ${declaration.toString()}', onlyVerbose: true);
     final fields = declaration.fields;
     final nameLexeme = fields.variables.first.name.lexeme;
     final variable = declaration.fields.variables.first;
