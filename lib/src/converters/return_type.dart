@@ -22,6 +22,9 @@ class ReturnTypeConverter {
             match.pattern, '${_clearString(groupOfGeneric)}[0..*]');
       }
     });
+    if (returnType.contains('ValueListenable')) {
+      returnType = "<font color='yellow'>$returnType</font>";
+    }
     return returnType.replaceAll('Future<', '');
   }
 
