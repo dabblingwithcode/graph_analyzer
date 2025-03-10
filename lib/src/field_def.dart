@@ -19,19 +19,24 @@ class FieldDef {
   FieldDef(final FieldDeclaration declaration) {
     final fields = declaration.fields;
     final nameLexeme = fields.variables.first.name.lexeme;
+    final variable = declaration.fields.variables.first;
+    final element = variable.declaredElement;
+    if (element != null) {
+      final inferredType =
+          element.type.getDisplayString(withNullability: false);
 
-    Logger().info(
-        'inferred tyoe is ${fields.variables.first.runtimeType.toString()}',
-        onlyVerbose: true);
+      Logger().info('inferred tyoe is $inferredType', onlyVerbose: true);
 
-    type = ReturnTypeConverter(
-      fields.type?.toString() ?? fields.variables.first.runtimeType.toString(),
-    ).inUml;
-    isPrivate = nameLexeme.startsWith('_');
-    name = nameLexeme.replaceAll(
-      RegExp(r'_'),
-      '',
-    );
+      type = ReturnTypeConverter(
+        fields.type?.toString() ??
+            fields.variables.first.runtimeType.toString(),
+      ).inUml;
+      isPrivate = nameLexeme.startsWith('_');
+      name = nameLexeme.replaceAll(
+        RegExp(r'_'),
+        '',
+      );
+    }
   }
 
   @override
