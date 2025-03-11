@@ -29,16 +29,22 @@ class MethodDef {
   MethodDef(final MethodDeclaration declaration) {
     Logger()
         .info('Field processing: ${declaration.toString()}', onlyVerbose: true);
-    Logger().info('Parameters: ${declaration.parameters.toString()}',
+    Logger().info(
+        'Parameters: ${declaration.parameters?.toString() ?? 'no parameters found'}',
         onlyVerbose: true);
-    final _parameters = declaration.parameters!.parameterElements;
+    final _parameters = declaration.parameters?.parameterElements;
     final buffer = StringBuffer();
-    for (final parameter in _parameters) {
-      buffer.write(
-          '${parameter?.type.toString().wrapWithColor(FontColor.type) ?? 'dynamic'}${parameter?.name.wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+    if (_parameters != null) {
+      for (final parameter in _parameters) {
+        buffer.write(
+            '${parameter?.type.toString().wrapWithColor(FontColor.type) ?? 'dynamic'}${parameter?.name.wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+      }
+      parameters = buffer.toString();
+    } else {
+      parameters = '';
     }
-    parameters = buffer.toString();
-    parameters = declaration.parameters?.toString() ?? '';
+
+    // parameters = declaration.parameters?.toString() ?? '';
     returnType = ReturnTypeConverter(
       declaration.returnType?.toString() ?? 'void',
     ).inUml;
