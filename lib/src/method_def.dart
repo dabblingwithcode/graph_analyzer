@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/ast/ast.dart';
 
+import '../utils.dart';
 import 'converters/return_type.dart';
 
 /// This class describe method definition
@@ -23,6 +24,11 @@ class MethodDef {
   late final bool isOperator;
 
   MethodDef(final MethodDeclaration declaration) {
+    Logger()
+        .info('Field processing: ${declaration.toString()}', onlyVerbose: true);
+    Logger().info('Parameters: ${declaration.parameters.toString()}',
+        onlyVerbose: true);
+
     returnType = ReturnTypeConverter(
       declaration.returnType?.toString() ?? 'void',
     ).inUml;
