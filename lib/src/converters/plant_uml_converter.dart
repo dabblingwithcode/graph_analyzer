@@ -55,7 +55,7 @@ final class PlantUmlConverter implements Converter {
         // '${method.isGetter && method.isSetter ? '/' : ''}'
         '${method.isSetter ? '${'set'.wrapWithColor(FontColor.keyword)} ' : ''}'
         '${method.isGetter || method.isSetter ? '<font color=#6fa8dc>${method.name}</font> => ' : '<font color=#6fa8dc>${method.name}(</font>${method.parameters.replaceAll('(', '').replaceAll(')', '')}<font color=#6fa8dc>):</font> '}'
-        '${method.returnType.replaceAll('void', '${'void'.wrapWithColor(FontColor.keyword)}')}\n',
+        '${method.returnType == 'Future<void>' ? '${'Future<'.wrapWithColor(FontColor.type)}${'void'.wrapWithColor(FontColor.keyword)}${'>'.wrapWithColor(FontColor.type)}' : method.returnType == 'void' ? '${'void'.wrapWithColor(FontColor.keyword)}' : '${method.returnType.wrapWithColor(FontColor.type)}'}\n',
       );
     }
 
