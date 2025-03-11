@@ -79,10 +79,17 @@ final class PlantUmlConverter implements Converter {
   String convertFields(final ClassDef def) {
     final result = StringBuffer();
     for (final field in def.fields) {
+      String type = field.type;
+      if (field.type.contains('ValueListenable') ||
+          field.type.contains('ValueNotifier')) {
+        type = '${type.wrapWithColor(FontColor.listenableType)}';
+      } else {
+        type = '${field.type.wrapWithColor(FontColor.type)}';
+      }
       result.write(
         '${field.isPrivate ? privateAccessModifier : publicAccessModifier}'
         '${field.name}:'
-        ' ${field.type}\n',
+        ' $type\n',
       );
     }
     return result.toString();
