@@ -1,3 +1,5 @@
+import '../../utils.dart';
+
 class ReturnTypeConverter {
   final String _returnType;
 
@@ -24,9 +26,11 @@ class ReturnTypeConverter {
     });
     if (returnType.contains('ValueListenable') ||
         returnType.contains('ValueNotifier')) {
-      return returnType = '<font color=#ffd700>$returnType</font>';
+      return returnType =
+          '${returnType.wrapWithColor(FontColor.listenableType)}';
     }
-    return '<font color=#faff00>$returnType</font>';
+    return returnType.wrapWithColor(FontColor.type);
+
     // return returnType.replaceAll('Future<', '');
   }
 

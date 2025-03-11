@@ -51,11 +51,11 @@ final class PlantUmlConverter implements Converter {
       result.write(
         '${method.isPrivate ? privateAccessModifier : publicAccessModifier}'
         //'${method.isGetter || method.isSetter ? '«' : ''}'
-        '${method.isGetter ? '<font color=#c36dfd>get</font> ' : ''}'
+        '${method.isGetter ? '${'get'.wrapWithColor(FontColor.keyword)} ' : ''}'
         // '${method.isGetter && method.isSetter ? '/' : ''}'
-        '${method.isSetter ? '<font color=#c36dfd>set</font> ' : ''}'
+        '${method.isSetter ? '${'set'.wrapWithColor(FontColor.keyword)} ' : ''}'
         '${method.isGetter || method.isSetter ? '<font color=#6fa8dc>${method.name}</font> => ' : '<font color=#6fa8dc>${method.name}(</font><font color=#ffffff>${method.parameters.replaceAll('(', '').replaceAll(')', '')}</font><font color=#6fa8dc>):</font> '}'
-        '${method.returnType.replaceAll('void', '<font color=#c36dfd>void</font>')}\n',
+        '${method.returnType.replaceAll('void', '${'void'.wrapWithColor(FontColor.keyword)}')}\n',
       );
     }
 

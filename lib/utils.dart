@@ -43,3 +43,20 @@ String wrapGreen(final String text) {
 String wrapBlue(final String text) {
   return '\x1B[34m$text\x1B[0m';
 }
+
+extension ColorWrap on String {
+  String wrapWithColor(final FontColor color) {
+    return '<font color=${color.value}>$this</font>';
+  }
+}
+
+enum FontColor {
+  listenableType('#ffd700'),
+  functionArgument('#d5372b'),
+  type('#faff00'),
+  keyword('#c36dfd');
+
+  final String value;
+
+  const FontColor(this.value);
+}

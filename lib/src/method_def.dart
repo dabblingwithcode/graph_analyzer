@@ -31,6 +31,13 @@ class MethodDef {
         .info('Field processing: ${declaration.toString()}', onlyVerbose: true);
     Logger().info('Parameters: ${declaration.parameters.toString()}',
         onlyVerbose: true);
+    final _parameters = declaration.parameters!.parameterElements;
+    final buffer = StringBuffer();
+    for (final parameter in _parameters) {
+      buffer.write(
+          '${parameter?.type.toString().wrapWithColor(FontColor.type) ?? 'dynamic'}${parameter?.name.wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+    }
+    parameters = buffer.toString();
     parameters = declaration.parameters?.toString() ?? '';
     returnType = ReturnTypeConverter(
       declaration.returnType?.toString() ?? 'void',
