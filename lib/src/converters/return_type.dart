@@ -1,5 +1,3 @@
-import '../../utils.dart';
-
 class ReturnTypeConverter {
   final String _returnType;
 
@@ -24,12 +22,7 @@ class ReturnTypeConverter {
             match.pattern, '${_clearString(groupOfGeneric)}[0..*]');
       }
     });
-    if (returnType.contains('ValueListenable') ||
-        returnType.contains('ValueNotifier')) {
-      return returnType =
-          '${returnType.wrapWithColor(FontColor.listenableType)}';
-    }
-    return returnType.wrapWithColor(FontColor.type);
+    return returnType;
 
     // return returnType.replaceAll('Future<', '');
   }

@@ -48,6 +48,19 @@ final class PlantUmlConverter implements Converter {
     final result = StringBuffer();
 
     for (final method in def.methods) {
+      String returnType = method.returnType;
+      if (method.returnType.contains('ValueListenable') ||
+          method.returnType.contains('ValueNotifier')) {
+        returnType = '${returnType.wrapWithColor(FontColor.listenableType)}';
+      } else if (method.returnType == 'Future<void>') {
+        returnType =
+            '${'Future<'.wrapWithColor(FontColor.type)}${'void'.wrapWithColor(FontColor.keyword)}${'>'.wrapWithColor(FontColor.type)}';
+      } else if (method.returnType == 'void') {
+        returnType = '${'void'.wrapWithColor(FontColor.keyword)}';
+      } else {
+        returnType = '${method.returnType.wrapWithColor(FontColor.type)}';
+      }
+
       result.write(
         '${method.isPrivate ? privateAccessModifier : publicAccessModifier}'
         //'${method.isGetter || method.isSetter ? '«' : ''}'
@@ -55,7 +68,7 @@ final class PlantUmlConverter implements Converter {
         // '${method.isGetter && method.isSetter ? '/' : ''}'
         '${method.isSetter ? '${'set'.wrapWithColor(FontColor.keyword)} ' : ''}'
         '${method.isGetter || method.isSetter ? '<font color=#6fa8dc>${method.name}</font> => ' : '<font color=#6fa8dc>${method.name}(</font>${method.parameters.replaceAll('(', '').replaceAll(')', '')}<font color=#6fa8dc>):</font> '}'
-        '${method.returnType == 'Future<void>' ? '${'Future<'.wrapWithColor(FontColor.type)}${'void'.wrapWithColor(FontColor.keyword)}${'>'.wrapWithColor(FontColor.type)}' : method.returnType == 'void' ? '${'void'.wrapWithColor(FontColor.keyword)}' : '${method.returnType.wrapWithColor(FontColor.type)}'}\n',
+        '$returnType\n',
       );
     }
 
