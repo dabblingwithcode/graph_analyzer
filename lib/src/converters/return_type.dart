@@ -6,7 +6,7 @@ class ReturnTypeConverter {
   String get inUml {
     var returnType = _returnType;
     if (returnType == 'void') {
-      return '<font color=#c36dfd>void</font>';
+      return 'void';
     }
     final regexpList = RegExp(r'\bList(<[^>]*>)?\b');
     regexpList.allMatches(returnType).forEach((final match) {
@@ -24,9 +24,9 @@ class ReturnTypeConverter {
     });
     if (returnType.contains('ValueListenable') ||
         returnType.contains('ValueNotifier')) {
-      returnType = '<font color=yellow>$returnType</font>';
+      return returnType = '<font color=#ffd700>$returnType</font>';
     }
-    return returnType;
+    return '<font color=#faff00>$returnType</font>';
     // return returnType.replaceAll('Future<', '');
   }
 
