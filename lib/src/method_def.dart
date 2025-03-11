@@ -32,12 +32,12 @@ class MethodDef {
     Logger().info(
         'Parameters: ${declaration.parameters?.toString() ?? 'no parameters found'}',
         onlyVerbose: true);
-    final _parameters = declaration.parameters?.parameterElements;
+
     final buffer = StringBuffer();
-    if (_parameters != null) {
-      for (final parameter in _parameters) {
+    if (declaration.parameters != null) {
+      for (final parameter in declaration.parameters!.parameters) {
         buffer.write(
-            '${parameter?.type.toString().wrapWithColor(FontColor.type) ?? 'dynamic'}${parameter?.name.wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+            '${parameter.runtimeType.toString().wrapWithColor(FontColor.type)}${parameter.name?.toString().wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
       }
       parameters = buffer.toString();
     } else {
