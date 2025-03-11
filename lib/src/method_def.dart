@@ -35,10 +35,16 @@ class MethodDef {
 
     final buffer = StringBuffer();
     if (declaration.parameters != null) {
-      for (final parameter in declaration.parameters!.parameterElements) {
-        final parameterType = parameter?.typeParameters.toString() ?? 'dynamic';
+      for (final parameter in declaration.parameters!.parameters) {
+        final parameterType = parameter is SimpleFormalParameter
+            ? parameter.type?.toString()
+            : parameter is DefaultFormalParameter
+                ? (parameter.parameter as SimpleFormalParameter)
+                    .type
+                    ?.toString()
+                : 'unknown';
         buffer.write(
-            '${parameterType.wrapWithColor(FontColor.type)} ${parameter?.name.toString().wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+            '${parameterType?.wrapWithColor(FontColor.type) ?? 'unknown'} ${parameter.name?.toString().wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
       }
       parameters = buffer.toString();
     } else {
