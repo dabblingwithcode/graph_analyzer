@@ -1,5 +1,4 @@
 import '../../code_uml.dart';
-import '../../utils.dart';
 
 part 'mermaid_uml_converter.dart';
 part 'plant_uml_converter.dart';

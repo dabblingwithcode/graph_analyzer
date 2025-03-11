@@ -26,7 +26,8 @@ class ReturnTypeConverter {
         returnType.contains('ValueNotifier')) {
       returnType = '<font color=yellow>$returnType</font>';
     }
-    return returnType.replaceAll('Future<', '');
+    return returnType;
+    // return returnType.replaceAll('Future<', '');
   }
 
   String _clearString(final String input) {

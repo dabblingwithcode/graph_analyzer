@@ -8,6 +8,9 @@ class MethodDef {
   /// Method name
   late final String name;
 
+  /// Method parameters
+  late final String parameters;
+
   /// Type of return value
   late final String returnType;
 
@@ -28,7 +31,7 @@ class MethodDef {
         .info('Field processing: ${declaration.toString()}', onlyVerbose: true);
     Logger().info('Parameters: ${declaration.parameters.toString()}',
         onlyVerbose: true);
-
+    parameters = declaration.parameters?.toString() ?? '';
     returnType = ReturnTypeConverter(
       declaration.returnType?.toString() ?? 'void',
     ).inUml;
