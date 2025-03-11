@@ -37,7 +37,7 @@ class MethodDef {
     if (declaration.parameters != null) {
       for (final parameter in declaration.parameters!.parameters) {
         buffer.write(
-            '${parameter.runtimeType.toString().wrapWithColor(FontColor.type)}${parameter.name?.toString().wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
+            '${parameter.declaredElement?.type.toString().wrapWithColor(FontColor.type)} ${parameter.name?.toString().wrapWithColor(FontColor.functionArgument) ?? 'no name found'}, ');
       }
       parameters = buffer.toString();
     } else {

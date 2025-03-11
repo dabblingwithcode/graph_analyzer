@@ -52,7 +52,7 @@ extension ColorWrap on String {
 
 enum FontColor {
   listenableType('#ffd700'),
-  functionArgument('#d5372b'),
+  functionArgument('#f4665b'),
   type('#faff00'),
   keyword('#c36dfd');
 
