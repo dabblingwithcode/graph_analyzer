@@ -27,7 +27,9 @@ class _FileReporter implements Reporter {
   @override
   Future<void> report(final List<ClassDef> defs) async {
     final fileExtension = converter.fileExtension;
-    final outputTxtFilePath = path.join(reportDirPath, 'output.$fileExtension');
+    final lastFolder = path.basename(reportDirPath);
+    final outputTxtFilePath =
+        path.join(reportDirPath, '$lastFolder.$fileExtension');
     var file = File(outputTxtFilePath);
 
     Logger().info('Creating output file...', onlyVerbose: true);
