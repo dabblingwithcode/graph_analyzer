@@ -35,16 +35,18 @@ class FieldDef {
       fields.type?.toString() ?? variable.initializer?.toString() ?? 'dynamic',
     ).inUml;
     Logger().info('type of $nameLexeme is is $type', onlyVerbose: true);
+
     isPrivate = nameLexeme.startsWith('_');
-    name = nameLexeme.replaceAll(
-      RegExp(r'_'),
-      '',
-    );
+    name = nameLexeme;
+    // name = nameLexeme.replaceAll(
+    //   RegExp(r'_'),
+    //   '',
+    // );
   }
 
   @override
   String toString() {
-    return '''FieledDef {
+    return '''FieldDef {
       name: $name,
       type: $type,
       isPrivate: $isPrivate,\n}''';

@@ -13,7 +13,7 @@ final class PlantUmlConverter implements Converter {
     stringBuffer.write('    ClassStereotypeFontColor #FFD700\n');
     stringBuffer.write('    ClassStereotypeFontSize 12\n');
     stringBuffer.write('    ClassStereotypeFontStyle bold\n');
-    stringBuffer.write('skinparam {\n\n');
+    stringBuffer.write('}\n');
     stringBuffer.write('skinparam class {\n');
     stringBuffer.write('    BackgroundColor #333333\n');
     stringBuffer.write('    BorderColor #000000\n');
@@ -54,8 +54,7 @@ final class PlantUmlConverter implements Converter {
         '${method.isGetter ? '<font color=#c36dfd>get</font> ' : ''}'
         // '${method.isGetter && method.isSetter ? '/' : ''}'
         '${method.isSetter ? '<font color=#c36dfd>set</font> ' : ''}'
-        // '${method.isGetter || method.isSetter ? '»' : ''}'
-        '${method.name}(): '
+        '${method.isGetter || method.isSetter ? '${method.name} =>' : '${method.name}(): '}'
         '${method.returnType}\n',
       );
     }
